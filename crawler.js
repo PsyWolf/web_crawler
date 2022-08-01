@@ -3,30 +3,30 @@ import { load } from 'cheerio';
 import fetchData from './fetchData.js';
 
 const usedLinks = [];
-const results = [];
 
 // crawls through a given url, save the img src into the results array and returns all the links in the page
 // will skip urls it already crawled
 const crawl = async (url, currDepth = 0) => {
+    const results = [];
     if (usedLinks.indexOf(url) !== -1) {
-        console.log(`this url was already crawled. url: ${url}`);
-        return[[], []];
+        // console.log(`this url was already crawled. url: ${url}`);
+        return [[], []];
     }
-    console.log(`current depth: ${currDepth}`);
+    // console.log(`current depth: ${currDepth}`);
     usedLinks.push(url);
     let links = [];
     await fetchData(url).then((res) => {
         if (!res) return;
         const html = res.data;
-        getImages(html, url, currDepth);
+        getImages(html, url, currDepth, results);
         links = getLinks(html, url);
-    });
+    }).catch((err) => [[], []]);
     return {links, results};
 };
 
 // gets the src of all <img> tag in a given html
 // save the results into the results array
-const getImages = (html, url, currDepth) => {
+const getImages = (html, url, currDepth, results) => {
     const $ = load(html);
     $(`img`).each(function() {
         let imgSrc = $(this).attr('src');
