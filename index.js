@@ -1,18 +1,17 @@
 import { writeFile } from 'fs';
 
 import crawl from './crawler.js';
-import grab from './grab.js';
+const args = process.argv.slice(2);
 
-// "https://blog.logrocket.com/node-js-web-scraping-tutorial/";
-const url = grab('--url'); 
-const depth = grab('--depth');
-
-if (url === -1) {
+if (args.length === 0) {
     console.error('url parameter is required');
-}
+    process.exit();
+} 
 
-if (depth === -1) {
-    depth = 0;
+const url = args[0];
+let depth = 0;
+if (args.length !== 1) {
+    depth = args[1];
 }
 
 let res = [];
@@ -31,9 +30,6 @@ const startCrawl = async (url, maxDepth, currDepth = 0) => {
         });
     }
 }
-
-
-
 
 startCrawl(url, depth).then(() => {
     writeFile("output.json", JSON.stringify(res), 'utf8', function (err) {
