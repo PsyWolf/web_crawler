@@ -1,0 +1,24 @@
+{
+  "name": "web_crawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PsyWolf/web_crawler.git"
+  },
+  "author": "Jacob Kovinko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PsyWolf/web_crawler/issues"
+  },
+  "homepage": "https://github.com/PsyWolf/web_crawler#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
