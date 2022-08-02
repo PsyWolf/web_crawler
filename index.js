@@ -37,9 +37,9 @@ const startCrawl = async (url, maxDepth, currDepth = 0) => {
     }
     console.log(`image count: ${res.length}`);
     if (links) {
-        links.forEach(async link => {
-            await startCrawl(link, maxDepth, currDepth + 1).then(writeToJson);
-        });
+        for (const link of links) {
+            await startCrawl(link, maxDepth, currDepth + 1)// .then(writeToJson);
+        }
     }
 }
 
